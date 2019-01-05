@@ -20,10 +20,10 @@
         <div class="collapse navbar-collapse text-center" id="navContent">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link text-white" href="#">게시판<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="#">Link</a>
+                    <a class="nav-link text-white" href="#">로그인</a>
                 </li>
             </ul>
         </div>
