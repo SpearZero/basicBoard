@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+nav {
+    opacity: 0.8;
+}
+
+nav ul li {
+    margin-right: 50px;
+}
+
+nav a:hover{
+    color : black !important;
+    text-decoration: none;
+}
+
+.active {
+    color : black !important;
+}
+
+.navbar-toggler{
+    background-color: white;
+}
