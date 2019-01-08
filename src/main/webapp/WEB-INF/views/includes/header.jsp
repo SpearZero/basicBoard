@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="/resources/css/main.css"/>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-primary fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-light bg-primary fixed-top" id="header-navi">
         <a href="#" class="navbar brand text-light"><h1>basicBoard</h1></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navContent" aria-controls="navContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>

@@ -5,7 +5,7 @@
     <script src="/resources/js/bootstrap.min.js"></script>
     <script>
         $(document).ready(function(){
-            $("nav ul li a").click(function(){
+            $("#header-navi ul li a").click(function(){
                 $('li a').removeClass("active");
                 $(this).addClass("active");
             })
