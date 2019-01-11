@@ -2,6 +2,7 @@ package com.basicBoard.mapper;
 
 import java.util.List;
 import com.basicBoard.dto.BoardDTO;
+import com.basicBoard.dto.Criteria;
 
 public interface BoardMapper {
 	
@@ -16,4 +17,6 @@ public interface BoardMapper {
 	public int delete(int bno);
 	
 	public int update(BoardDTO board);
+	
+	public List<BoardDTO> getListWithPaging(Criteria cri);
 }

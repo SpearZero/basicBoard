@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.basicBoard.dto.BoardDTO;
+import com.basicBoard.dto.Criteria;
 import com.basicBoard.service.BoardService;
 
 @Controller
@@ -26,11 +27,16 @@ public class BoardController {
 	}
 	
 	@GetMapping("/list")
-	public String list(Model model) {
+	public String list(Criteria cri, Model model) {
 		
-		model.addAttribute("list", service.getList());
+		model.addAttribute("list", service.getList(cri));
 		
 		return "/board/board";
+	}
+	
+	@GetMapping("/register")
+	public void register() {
+		
 	}
 	
 	@PostMapping("/register")
@@ -42,7 +48,7 @@ public class BoardController {
 		return "redirect:/board/list";
 	}
 	
-	@GetMapping("/get")
+	@GetMapping({"/get","/modify"})
 	public void get(@RequestParam("bno")int bno, Model model) {
 		
 		model.addAttribute("board", service.get(bno));
@@ -52,17 +58,17 @@ public class BoardController {
 	public String modify(BoardDTO board, RedirectAttributes rttr) {
 		
 		if(service.modify(board)) {
-			rttr.addAttribute("result", "ok");
+			rttr.addFlashAttribute("result", "ok");
 		}
 		
-		return "redirect:/bord/list";
+		return "redirect:/board/list";
 	}
 	
 	@PostMapping("/remove")
 	public String remove(@RequestParam("bno")int bno, RedirectAttributes rttr) {
 		
 		if(service.remove(bno)) {
-			rttr.addAttribute("result", "success");
+			rttr.addFlashAttribute("result", "success");
 		}
 		
 		return "redirect:/board/list";

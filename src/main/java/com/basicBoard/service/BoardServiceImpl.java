@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import com.basicBoard.dto.BoardDTO;
+import com.basicBoard.dto.Criteria;
 import com.basicBoard.mapper.BoardMapper;
 
 @Controller
@@ -49,9 +50,9 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public List<BoardDTO> getList() {
+	public List<BoardDTO> getList(Criteria cri) {
 		logger.info("getList!!!!!!!!!!!!!!!!!!!");
 		
-		return mapper.getList();
+		return mapper.getListWithPaging(cri);
 	}
 }
