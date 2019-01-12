@@ -2,34 +2,28 @@ package com.basicBoard.dto;
 
 public class Criteria {
 	
-	private int pageStart;
+	private int offset;
 	private int amount;
 	
-	public Criteria() {}
-
-	public Criteria(int pageStart, int amount) {
-		this.pageStart = pageStart;
+	public Criteria() {
+		this(0, 10);
+	}
+	
+	public Criteria(int offset, int amount) {
+		this.offset = offset;
 		this.amount = amount;
 	}
-
-	public int getPageStart() {
-		return pageStart;
+	
+	public int getOffset() {
+		return offset;
 	}
-
-	public void setPageStart(int pageStart) {
-		this.pageStart = pageStart;
+	public void setOffset(int offset) {
+		this.offset = offset;
 	}
-
 	public int getAmount() {
 		return amount;
 	}
-
 	public void setAmount(int amount) {
 		this.amount = amount;
-	}
-
-	@Override
-	public String toString() {
-		return "Criteria [pageStart=" + pageStart + ", amount=" + amount + "]";
 	}
 }
