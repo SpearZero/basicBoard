@@ -45,4 +45,8 @@
 			from tbl_board order by bno desc limit #{offset},#{amount}
 		]]>
 	</select>
+	
+	<select id="getTotalCount" resultType="int">
+		select count(*) from tbl_board where bno > 0
+	</select>
 </mapper>

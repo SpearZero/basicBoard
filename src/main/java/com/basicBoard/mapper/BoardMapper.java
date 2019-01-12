@@ -19,4 +19,6 @@ public interface BoardMapper {
 	public int update(BoardDTO board);
 	
 	public List<BoardDTO> getListWithPaging(Criteria cri);
+	
+	public int getTotalCount(Criteria cri);
 }

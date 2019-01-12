@@ -19,7 +19,7 @@
 					<c:forEach items="${list}" var="board">
 						<tr>
 							<td><c:out value="${board.bno}"/></td>
-							<td><a href='<c:out value = "${board.bno}"/>' class="getPage">
+							<td><a href='<c:out value = "${board.bno}"/>' class="getArticle">
 								<c:out value="${board.title }"/></a>
 							</td>
 							<td><c:out value="${board.writer}"/></td>
@@ -127,7 +127,7 @@
 				moveForm.submit();
 			});
 			
-			$(".getPage").on("click", function(e) {
+			$(".getArticle").on("click", function(e) {
 				e.preventDefault();
 				moveForm.append("<input type='hidden' name='bno' value='"+ $(this).attr("href") +"'>");
 				moveForm.attr("action", "/board/get");
