@@ -23,6 +23,9 @@
 				<button class="btn btn-primary" data-action="modfiy">수정</button>
 				<button class="btn btn-primary" data-action="list">목록</button>
 			</div>
+			
+			<input type="hidden" name="offset" value='<c:out value="${cri.offset}"/>'>
+			<input type="hidden" name="amount" value='<c:out value="${cri.amount}"/>'>		
     	</form>
 	</div>
     
@@ -37,8 +40,14 @@
 				var action = $(this).data("action");
 				
 				if(action === 'list') {
-					self.location = "/board/list";
-					return;
+					form.find("#bno").remove();
+					form.find("#writer").remove();
+					form.find("#title").remove();
+					form.find("#content").remove();
+					
+					form.attr("action", "/board/list");
+					form.attr("method", "get");
+					form.submit();
 				}
 				
 				form.submit();

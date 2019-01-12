@@ -18,4 +18,6 @@ public interface BoardService {
 //	public List<BoardDTO> getList();
 	
 	public List<BoardDTO> getList(Criteria cri);
+	
+	public int getTotal(Criteria cri);
 }
