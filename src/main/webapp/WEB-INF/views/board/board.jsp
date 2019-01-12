@@ -19,7 +19,9 @@
 					<c:forEach items="${list}" var="board">
 						<tr>
 							<td><c:out value="${board.bno}"/></td>
-							<td><a href='/board/get?bno=<c:out value = "${board.bno}"/>'><c:out value="${board.title }"/></a></td>
+							<td><a href='<c:out value = "${board.bno}"/>' class="getPage">
+								<c:out value="${board.title }"/></a>
+							</td>
 							<td><c:out value="${board.writer}"/></td>
 							<td><fmt:formatDate value="${board.regDate}" pattern="yyyy-MM-dd"/></td>
 							<td><fmt:formatDate value="${board.updateDate}" pattern="yyyy-MM-dd"/></td>
@@ -33,13 +35,23 @@
             <div id="pagenNavi" class="col-lg-12 d-flex justify-content-center mb-3">
                 <nav aria-label="Page navigation">
                     <ul class="pagination">
-                        <li class="page-item"><a href="#" class="page-link">Previous</a></li>
-                        <li class="page-item"><a href="#" class="page-link">1</a></li>
-                        <li class="page-item"><a href="#" class="page-link">2</a></li>
-                        <li class="page-item"><a href="#" class="page-link">3</a></li>
-                        <li class="page-item"><a href="#" class="page-link">4</a></li>
-                        <li class="page-item"><a href="#" class="page-link">5</a></li>
-                        <li class="page-item"><a href="#" class="page-link">Next</a></li>
+                    	<c:if test="${pageMaker.prev}">
+                    		<li class="page-item">
+                    			<a href="${(pageaker.startPage-1) * 10}" class="page-link">Previous</a>
+                    		</li>
+                    	</c:if>
+                    	
+                    	<c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
+	                        <li class="page-item">
+	                        	<a href="${(num-1)*10}" class="page-link">${num}</a>
+	                        </li>
+                    	</c:forEach>
+                    	
+                        <c:if test="${pageMaker.next}">
+                        	<li class="page-item">
+                        		<a href="${(pageMaker.endPage) * 10}" class="page-link">Next</a>
+                        	</li>
+                        </c:if>
                     </ul>
                 </nav>
             </div>
@@ -75,6 +87,10 @@
             </div>
         </div>
     </div>
+    <form action="/board/list" id="moveForm" method="get">
+    	<input type="hidden" name="offset" value = "${pageMaker.cri.offset}">
+    	<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
+    </form>
     
 	<script>
 		$(document).ready(function(){
@@ -101,6 +117,22 @@
 				
 				$("#registerModal").modal("show");
 			}
+			
+			var moveForm = $("#moveForm");
+			
+			$(".pagination a").on("click", function(e) {
+				e.preventDefault();
+				
+				moveForm.find("input[name='offset']").val($(this).attr("href"));
+				moveForm.submit();
+			});
+			
+			$(".getPage").on("click", function(e) {
+				e.preventDefault();
+				moveForm.append("<input type='hidden' name='bno' value='"+ $(this).attr("href") +"'>");
+				moveForm.attr("action", "/board/get");
+				moveForm.submit();
+			});
 		})
 	</script>   
 <%@ include file="../includes/footer.jsp" %>
