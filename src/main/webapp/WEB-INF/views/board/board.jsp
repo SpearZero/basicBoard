@@ -55,16 +55,25 @@
                     </ul>
                 </nav>
             </div>
-            <div class="input-group col-lg-6 mx-auto">
-                <select name="searchType" id="searchType" class="custom-select col-lg-3">
-                    <option selected>...</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                </select>
-                <input type="text" class="form-control" name="searchword">
-                <button type="button" class="btn btn-outline-primary">검색</button>
-            </div>
+        </div>
+        <div class="row text-center">
+	        <div class="col-lg-12">
+	        	<form action="/board/list" method="get" id="searchForm">
+	        		<select name="type">
+	        			<option value="" <c:out value="${pageMaker.cri.type == null ? 'selected' : ''}"/>>---</option>
+	        			<option value="T" <c:out value="${pageMaker.cri.type eq 'T' ? 'selected' : ''}"/>>제목</option>
+	        			<option value="C" <c:out value="${pageMaker.cri.type eq 'C' ? 'selected' : ''}"/>>내용</option>
+	        			<option value="W" <c:out value="${pageMaker.cri.type eq 'W' ? 'selected' : ''}"/>>작성자</option>
+	        			<option value="TC" <c:out value="${pageMaker.cri.type eq 'TC' ? 'selected' : ''}"/>>제목 or 내용</option>
+	        			<option value="TW" <c:out value="${pageMaker.cri.type eq 'TW' ? 'selected' : ''}"/>>제목 or 작성자</option>
+	        			<option value="TWC" <c:out value="${pageMaker.cri.type eq 'TWC' ? 'selected' : ''}"/>>제목 or 내용 or 작성자</option>
+	        		</select>
+	             <input type="text" name="keyword" value="${pageMaker.cri.keyword}">
+	             <input type="hidden" name="offset" value="${pageMaker.cri.offset}"/>
+	             <input type="hidden" name="amount" value="${pageMaker.cri.amount}"/>
+	            <button class="btn btn-outline-primary">검색</button>
+	        	</form>
+	        </div>
         </div>
     </div>
     
@@ -90,6 +99,8 @@
     <form action="/board/list" id="moveForm" method="get">
     	<input type="hidden" name="offset" value = "${pageMaker.cri.offset}">
     	<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
+        <input type="hidden" name="type" value="${pageMaker.cri.type}">
+	    <input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
     </form>
     
 	<script>
@@ -132,6 +143,25 @@
 				moveForm.append("<input type='hidden' name='bno' value='"+ $(this).attr("href") +"'>");
 				moveForm.attr("action", "/board/get");
 				moveForm.submit();
+			});
+			
+			var searchForm = $("#searchForm")
+			
+			$("#searchForm button").on("click", function(e) {
+				if(!searchForm.find("option:selected").val()) {
+					alert("검색 종류를 선택하세요");
+					return false;
+				}
+				
+				if(!searchForm.find("input[name='keyword']").val()) {
+					alert("키워드를 입력하세요.");
+					return false;
+				}
+				
+				searchForm.find("input[name='offset']").val("0");
+				e.preventDefault();
+				
+				searchForm.submit();
 			});
 		})
 	</script>   

@@ -25,8 +25,10 @@
 			</div>
 			
 			<input type="hidden" name="offset" value='<c:out value="${cri.offset}"/>'>
-			<input type="hidden" name="amount" value='<c:out value="${cri.amount}"/>'>		
-    	</form>
+			<input type="hidden" name="amount" value='<c:out value="${cri.amount}"/>'>
+			<input type="hidden" name="type" value='<c:out value="${cri.type}"/>'>
+			<input type="hidden" name="keyword" value='<c:out value="${cri.keyword}"/>'>
+	</form>
 	</div>
     
 	<script>
