@@ -16,4 +16,6 @@ public interface ReplyMapper {
 	public int update(ReplyDTO repy);
 	
 	public List<ReplyDTO> getListWithPaging(@Param("cri")Criteria cri, @Param("bno")int bno);
+	
+	public int getCountByBno(int bno);
 }

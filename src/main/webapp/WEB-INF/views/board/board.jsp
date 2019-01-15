@@ -37,7 +37,7 @@
                     <ul class="pagination">
                     	<c:if test="${pageMaker.prev}">
                     		<li class="page-item">
-                    			<a href="${(pageaker.startPage-1) * 10}" class="page-link">Previous</a>
+                    			<a href="${(pageaker.startPage-2) * 10}" class="page-link">Previous</a>
                     		</li>
                     	</c:if>
                     	

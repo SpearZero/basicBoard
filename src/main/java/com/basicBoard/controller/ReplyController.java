@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.basicBoard.dto.Criteria;
 import com.basicBoard.dto.ReplyDTO;
+import com.basicBoard.dto.ReplyPageDTO;
 import com.basicBoard.service.ReplyService;
 
 @RequestMapping("/replies/")
@@ -42,11 +43,11 @@ public class ReplyController {
 	@GetMapping(value = "/pages/{bno}/{offset}", 
 			produces = {MediaType.APPLICATION_XML_VALUE,
 			MediaType.APPLICATION_JSON_UTF8_VALUE})
-	public ResponseEntity<List<ReplyDTO>> getList(@PathVariable("offset")int offset, @PathVariable("bno")int bno) {
+	public ResponseEntity<ReplyPageDTO> getList(@PathVariable("offset")int offset, @PathVariable("bno")int bno) {
 		
 		Criteria cri = new Criteria(offset,10);
 		
-		return new ResponseEntity<>(service.getList(cri, bno), HttpStatus.OK);
+		return new ResponseEntity<>(service.getListPage(cri, bno), HttpStatus.OK);
 	}
 	
 	@DeleteMapping(value = "/{rno}", 
