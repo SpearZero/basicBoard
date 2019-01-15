@@ -27,10 +27,10 @@ public class MapperTest {
 	
 	@Test
 	public void testList() {
-		Criteria cri = new Criteria();
+		Criteria cri = new Criteria(0,10);
 		
 		List<ReplyDTO> replies = mapper.getListWithPaging(cri, 42);
 		
-		replies.forEach(reply -> System.out.println(reply));
+		replies.forEach(reply -> logger.info(reply.toString()));
 	}
 }

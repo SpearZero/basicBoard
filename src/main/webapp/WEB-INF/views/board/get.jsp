@@ -66,6 +66,19 @@
                 <button class="btn btn-primary" data-action="addComment">등록</button>
             </div>
         </div>
+        <div class="row mb-3">
+        <div class="col-md-12">
+            <nav aria-label="Page navigation example" class="comment-page">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                </ul>
+            </nav>
+        </div>
+        </div>
     </div>
     
     <script src="/resources/js/reply.js"></script>
@@ -78,8 +91,19 @@
 			showList(0);
 			
 			function showList(offset) {
-				replyService.getList({bno : bnoValue, offset : offset || 0}, function(list){
+				
+				replyService.getList({bno : bnoValue, offset : offset || 0}, function(replyCnt, list){
+					
+					console.log(list);
+					
+					if(offset == -1) {
+						offset = replyCnt / 10;
+						showList(offset);
+						return;
+					}
+					
 					var str = "";
+					
 					if(list == null || list.length == 0) {
 						replyUL.html("");
 						return;
@@ -95,8 +119,59 @@
 					}
 					
 					replyUL.html(str);
+					showReplyPage(replyCnt);
 				});
 			}
+			
+			var offset = 0;
+			var replyPage = $(".comment-page");
+			
+			function showReplyPage(replyCnt) {
+				
+				var endNum = (Math.floor(offset / 100) + 1) * 10;
+				var startNum = endNum - 9;
+				
+				var prev = startNum != 1;
+				var next = false;
+				
+				if(endNum * 10 >= replyCnt) {
+					endNum = Math.ceil(replyCnt / 10.0);
+				}
+				
+				if(endNum * 10 < replyCnt) {
+					next = true;
+				}
+				
+				var str = "<ul class='pagination justify-content-center'>";
+				
+				if(prev) {
+					str += "<li class='page-item'><a class='page-link' href='" + (startNum-2) * 10 + "'>Previous</a></li>";
+				}
+				
+				for(var i = startNum; i <= endNum; i++) {
+					var active = (offset/10)+1 == i ? "active" : "";
+					
+					str += "<li class='page-item " + active + "'><a class='page-link' href='"+ (i-1)*10 +"'>" + i + "</a></li>";
+				}
+				
+				if(next) {
+					str += "<li class='page-item'><a class='page-link' href='" + endNum * 10 + "'>Next</aL</li>";
+				}
+				
+				str += "</ul></div>";
+				
+				replyPage.html(str);
+			}
+			
+			replyPage.on("click", "li a", function(e){
+				e.preventDefault();
+				
+				var targetOffset = $(this).attr("href");
+				
+				offset = targetOffset;
+				
+				showList(offset);
+			});
 			
 			// 동적으로 이벤트를 주기 위해
 			$(".reply").on("click","button", function(e) {
@@ -123,13 +198,18 @@
 						
 						alert(result);
 						
-						showList(0);
+						showList(-1);
 					});
 					
 					$("#reply").val("");
 					$("#replyer").val("");
 				} else if(action === 'deleteComment') {
-					console.log("확인만할게용");
+					var rno = $(this).closest("li").data("rno");
+					
+					replyService.remove(rno, function(result) {
+							alert(result);
+							showList(offset);
+					});
 				}
 			});
     	});
