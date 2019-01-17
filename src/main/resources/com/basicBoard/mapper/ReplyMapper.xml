@@ -29,5 +29,5 @@
 	
 	<select id="getCountByBno" resultType="int">
 		select count(rno) from tbl_reply where bno = #{bno}
-	</select>	
+	</select>
 </mapper>

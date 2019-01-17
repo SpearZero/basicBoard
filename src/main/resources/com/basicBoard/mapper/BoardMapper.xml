@@ -39,9 +39,13 @@
 		where bno = #{bno}
 	</update>
 	
+	<update id="updateReplyCnt">
+		update tbl_board set replycnt = replycnt + #{amount} where bno = #{bno}
+	</update>	
+	
 	<select id="getListWithPaging" resultType="com.basicBoard.dto.BoardDTO">
 		select 
-			bno, title, content, writer, regdate, updatedate
+			bno, title, content, writer, regdate, updatedate, replycnt
 		from 
 			tbl_board 
 		<trim prefix="where(" suffix=") " prefixOverrides="OR">
