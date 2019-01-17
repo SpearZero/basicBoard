@@ -17,4 +17,6 @@ public interface ReplyService {
 	public List<ReplyDTO> getList(Criteria cri, int bno);
 	
 	public ReplyPageDTO getListPage(Criteria cri, int bno);
+	
+	public ReplyDTO read(int rno);
 }

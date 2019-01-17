@@ -11,6 +11,8 @@ public class BoardDTO {
 	private Date regDate;
 	private Date updateDate;
 	
+	private int replyCnt;
+	
 	public BoardDTO() {}
 
 	public int getBno() {
@@ -61,9 +63,17 @@ public class BoardDTO {
 		this.updateDate = updateDate;
 	}
 
+	public int getReplyCnt() {
+		return replyCnt;
+	}
+
+	public void setReplyCnt(int replyCnt) {
+		this.replyCnt = replyCnt;
+	}
+
 	@Override
 	public String toString() {
 		return "BoardDTO [bno=" + bno + ", title=" + title + ", content=" + content + ", writer=" + writer
-				+ ", regDate=" + regDate + ", updateDate=" + updateDate + "]";
+				+ ", regDate=" + regDate + ", updateDate=" + updateDate + ", replyCnt=" + replyCnt + "]";
 	}
 }

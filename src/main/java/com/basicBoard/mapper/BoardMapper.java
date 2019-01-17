@@ -1,6 +1,9 @@
 package com.basicBoard.mapper;
 
 import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.basicBoard.dto.BoardDTO;
 import com.basicBoard.dto.Criteria;
 
@@ -21,4 +24,6 @@ public interface BoardMapper {
 	public List<BoardDTO> getListWithPaging(Criteria cri);
 	
 	public int getTotalCount(Criteria cri);
+	
+	public void updateReplyCnt(@Param("bno")int bno, @Param("amount")int amount);
 }
