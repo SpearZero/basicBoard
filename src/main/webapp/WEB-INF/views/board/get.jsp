@@ -36,23 +36,27 @@
     <div class="container reply mt-3">
         <div class="row mt-2">
             <div class="col-md-12">
-                <div class="panel panel-heading"></div>
-                <div class="panel-body">
-                    <ul class="chat list-group">
-                        <li class="list-group-item" data-rno='12'>
-                            <div>
-                                <div class="header">
-                                    <strong class="primary-font">user00</strong>
-                                    <small class="float-right text-muted">2018-01-01 13:13</small>
-                                </div>
-                                <div class="body">
-                                    <p class="d-inline-block">ㅋㅋㅋㅋㅋㅋ</p>
-                                    <button class="float-right d-inline-block btn btn-primary" data-action="deleteComment">삭제</button>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+            	<div class="card">
+            		<div class="card-header">
+            			Comments
+            		</div>
+	                <div class="card-body">
+	                    <ul class="chat list-group">
+	                        <li class="list-group-item" data-rno='12'>
+	                            <div>
+	                                <div class="header">
+	                                    <strong class="primary-font">user00</strong>
+	                                    <small class="float-right text-muted">2018-01-01 13:13</small>
+	                                </div>
+	                                <div class="body">
+	                                    <p class="d-inline-block">ㅋㅋㅋㅋㅋㅋ</p>
+	                                    <button class="float-right d-inline-block btn btn-primary" data-action="deleteComment">삭제</button>
+	                                </div>
+	                            </div>
+	                        </li>
+	                    </ul>
+	                </div>
+            	</div>
             </div>
         </div>
         <div class="row text-right mt-3 mb-3">
@@ -91,13 +95,10 @@
 			showList(0);
 			
 			function showList(offset) {
-				
-				replyService.getList({bno : bnoValue, offset : offset || 0}, function(replyCnt, list){
-					
-					console.log(list);
+				replyService.getList({bno : bnoValue, offset : offset}, function(replyCnt, list){
 					
 					if(offset == -1) {
-						offset = replyCnt / 10;
+						offset = Math.floor(replyCnt / 10) * 10;
 						showList(offset);
 						return;
 					}

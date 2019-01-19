@@ -26,7 +26,7 @@ var replyService = (function(){
 	
 	function getList(param, callback, error) {
 		var bno = param.bno;
-		var offset = param.offset || 0;
+		var offset = param.offset == -1 ? 0 : param.offset;
 		
 		$.getJSON("/replies/pages/"+bno+"/"+offset+".json",
 			function(data) {

@@ -1,6 +1,7 @@
 package com.basicBoard.dto;
 
 import java.util.Date;
+import java.util.List;
 
 public class BoardDTO {
 	
@@ -12,6 +13,8 @@ public class BoardDTO {
 	private Date updateDate;
 	
 	private int replyCnt;
+	
+	private List<BoardAttachDTO> attachList;
 	
 	public BoardDTO() {}
 
@@ -69,6 +72,14 @@ public class BoardDTO {
 
 	public void setReplyCnt(int replyCnt) {
 		this.replyCnt = replyCnt;
+	}
+
+	public List<BoardAttachDTO> getAttachList() {
+		return attachList;
+	}
+
+	public void setAttachList(List<BoardAttachDTO> attachList) {
+		this.attachList = attachList;
 	}
 
 	@Override
