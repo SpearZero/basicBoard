@@ -2,6 +2,7 @@ package com.basicBoard.service;
 
 import java.util.List;
 
+import com.basicBoard.dto.BoardAttachDTO;
 import com.basicBoard.dto.BoardDTO;
 import com.basicBoard.dto.Criteria;
 
@@ -20,4 +21,6 @@ public interface BoardService {
 	public List<BoardDTO> getList(Criteria cri);
 	
 	public int getTotal(Criteria cri);
+	
+	public List<BoardAttachDTO> getAttachList(int bno);
 }

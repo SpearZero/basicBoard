@@ -49,4 +49,10 @@ public class BoardAttachDTO {
 	public void setBno(int bno) {
 		this.bno = bno;
 	}
+
+	@Override
+	public String toString() {
+		return "BoardAttachDTO [uuid=" + uuid + ", uploadPath=" + uploadPath + ", fileName=" + fileName + ", fileType="
+				+ fileType + ", bno=" + bno + "]";
+	}
 }

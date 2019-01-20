@@ -3,6 +3,8 @@ package com.basicBoard.controller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -12,9 +14,12 @@ import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -65,7 +70,7 @@ public class FileController {
 				
 				if(checkImageType(saveFile)) {
 					attachDTO.setImage(true);
-					FileOutputStream thumbnail = new FileOutputStream(new File(uploadPath,"s"+uploadFileName));
+					FileOutputStream thumbnail = new FileOutputStream(new File(uploadPath,"s_"+uploadFileName));
 					Thumbnailator.createThumbnail(multipartFile.getInputStream(), thumbnail, 100,100);
 					thumbnail.close();
 				}
@@ -77,6 +82,57 @@ public class FileController {
 		}
 		
 		return new ResponseEntity<>(list,HttpStatus.OK);
+	}
+	
+	@GetMapping("/display")
+	public ResponseEntity<byte[]> getFiles(String fileName) {
+		logger.info("fileName : " + fileName);
+		
+		File file = new File("c:\\upload\\"+fileName);
+		
+		logger.info("file : " + file);
+		
+		ResponseEntity<byte[]> result = null;
+		
+		
+		try {
+			HttpHeaders header = new HttpHeaders();
+			
+			header.add("Content-Type", Files.probeContentType(file.toPath()));
+			result = new ResponseEntity<>(FileCopyUtils.copyToByteArray(file), header, HttpStatus.OK);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	@PostMapping("/deleteFile")
+	public ResponseEntity<String> deleteFile(String fileName, String type) {
+		logger.info("deleteFile : " + fileName);
+		
+		File file;
+		
+		try {
+			file = new File("c:\\upload\\"+URLDecoder.decode(fileName,"UTF-8"));
+			
+			file.delete();
+			
+			if (type.equals("image")) {
+				String largeFileName = file.getAbsolutePath().replace("s_", "");
+				
+				logger.info("largeFileName : " + largeFileName);
+				
+				file = new File(largeFileName);
+				
+				file.delete();
+			}
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		
+		return new ResponseEntity<String>("deletec", HttpStatus.OK);
 	}
 	
 	private String getFolder() {
