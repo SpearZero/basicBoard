@@ -1,5 +1,9 @@
 package com.basicBoard.controller;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -91,7 +95,12 @@ public class BoardController {
 	@PostMapping("/remove")
 	public String remove(@RequestParam("bno")int bno,@ModelAttribute("cri")Criteria cri, RedirectAttributes rttr) {
 		
+		List<BoardAttachDTO> attachList = service.getAttachList(bno);
+		
 		if(service.remove(bno)) {
+			
+			deleteFiles(attachList);
+			
 			rttr.addFlashAttribute("result", "success");
 		}
 		
@@ -104,5 +113,29 @@ public class BoardController {
 		logger.info("getAttachList " + bno);
 		
 		return new ResponseEntity<>(service.getAttachList(bno), HttpStatus.OK);
+	}
+	
+	private void deleteFiles(List<BoardAttachDTO> attachList) {
+		
+		if(attachList == null || attachList.size() == 0) {
+			return;
+		}
+		
+		attachList.forEach(attach -> {
+			
+			try {
+				Path file = Paths.get("c:\\upload\\"+attach.getUploadPath()+"\\"+attach.getUuid()+"_"+attach.getFileName());
+				Files.deleteIfExists(file);
+				
+				if(Files.probeContentType(file).startsWith("image")) {
+					Path thumbnail = Paths.get("c:\\upload\\"+attach.getUploadPath()+"\\s_"+attach.getUuid()+"_"+attach.getFileName());
+					
+					Files.delete(thumbnail);
+				}
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		});
 	}
 }
