@@ -16,6 +16,10 @@
 	</select>
 	
 	<delete id="deleteAll">
-		delete tbl_attach where bno = #{bno}
+		delete from tbl_attach where bno = #{bno}
 	</delete>
+	
+	<select id="getOldFiles" resultType="com.basicBoard.dto.BoardAttachDTO">
+		select * from tbl_attach where uploadPath = date_format(now() - interval 1 day, '%Y\%m\%d')
+	</select>
 </mapper>
