@@ -46,7 +46,7 @@ public class FileCheckTask {
 		
 		logger.warn("----------------------------------------");
 		for(File file : removeFiles) {
-			file.delete();s
+			file.delete();
 		}
 	}
 	
