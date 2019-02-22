@@ -5,7 +5,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.basicBoard.dto.BoardAttachDTO;
@@ -14,7 +14,7 @@ import com.basicBoard.dto.Criteria;
 import com.basicBoard.mapper.BoardAttachMapper;
 import com.basicBoard.mapper.BoardMapper;
 
-@Controller
+@Service
 public class BoardServiceImpl implements BoardService{
 	private static Logger logger = LoggerFactory.getLogger(BoardServiceImpl.class);
 	
@@ -54,7 +54,7 @@ public class BoardServiceImpl implements BoardService{
 		
 		boolean modifyResult = mapper.update(board) == 1;
 		
-		if(modifyResult && board.getAttachList().size() > 0) {
+		if(modifyResult && board.getAttachList() != null && board.getAttachList().size() > 0) {
 			board.getAttachList().forEach(attach -> {
 				attach.setBno(board.getBno());
 				attachMapper.insert(attach);
