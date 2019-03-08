@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/resources/css/header.css"/>
     <link rel="stylesheet" href="/resources/css/main.css"/>
     <link rel="stylesheet" href="/resources/css/all.css"/>
+    <link rel="stylesheet" href="/resources/css/fontawesome.css"/>
     <script src="/resources/js/jquery-3.3.1.js"></script>
     <script src="/resources/js/popper.min.js"></script>
     <script src="/resources/js/bootstrap.min.js"></script>

@@ -17,11 +17,11 @@ public class TestController {
 	public void login(String error, String logout, Model model) {
 		
 		if(error != null) {
-			model.addAttribute("error", "로그인 에러");
+			model.addAttribute("error", "error");
 		}
 		
 		if(logout != null) {
-			model.addAttribute("logout", "로그아웃");
+			model.addAttribute("logout", "logout");
 		}
 	}
 }
