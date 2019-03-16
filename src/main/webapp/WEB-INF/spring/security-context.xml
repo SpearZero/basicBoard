@@ -10,6 +10,7 @@
 		<security:intercept-url pattern="/test/member" access="hasRole('ROLE_MEMBER')" />		
 	
 		<security:form-login login-page="/login" />
+		<security:logout logout-url="/logout" logout-success-url="/" invalidate-session="true"/>
 		
 		<!-- POST 전송을 허용하기 위해 -->
 		<security:csrf disabled="true"/>
