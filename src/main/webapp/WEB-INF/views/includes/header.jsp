@@ -36,6 +36,9 @@
 	                    <a class="nav-link text-white" href="/logout">로그아웃</a>            	
                 	</sec:authorize>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="/board/list">회원가입</a>
+                </li>
             </ul>
         </div>
     </nav>
