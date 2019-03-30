@@ -37,7 +37,7 @@
                 	</sec:authorize>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="/board/list">회원가입</a>
+                    <a class="nav-link text-white" href="/signup/register">회원가입</a>
                 </li>
             </ul>
         </div>
