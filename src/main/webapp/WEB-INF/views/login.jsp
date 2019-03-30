@@ -6,7 +6,7 @@
         <form method="post" action="/login">
             <div class="input-group mb-3 col-md-6 mx-auto">
                 <div class="input-group-prepend">
-                    <div class="input-group-text"><i class="far fa-user"></i></div>
+                    <div class="input-group-text"><i class="fas fa-user"></i></div>
                 </div>
                 <input type="text" class="form-control" name="username" placeholder="id">
             </div>
