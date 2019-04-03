@@ -1,5 +1,5 @@
 package com.basicBoard.mapper;
 
 public interface UserMapper {
-	public int checkIdExist(String userId);
+	public int checkIdExist(String checkId);
 }
