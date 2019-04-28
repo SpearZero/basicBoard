@@ -16,6 +16,8 @@ import com.basicBoard.dto.Criteria;
 import com.basicBoard.dto.ReplyDTO;
 import com.basicBoard.mapper.BoardMapper;
 import com.basicBoard.mapper.ReplyMapper;
+import com.basicBoard.mapper.UserMapper;
+import com.basicBoard.service.UserService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
@@ -23,14 +25,11 @@ public class MapperTest {
 	private static Logger logger = LoggerFactory.getLogger(MapperTest.class);
 	
 	@Autowired
-	private ReplyMapper mapper;
+	private UserService service;
 	
 	@Test
-	public void testList() {
-		Criteria cri = new Criteria(0,10);
-		
-		List<ReplyDTO> replies = mapper.getListWithPaging(cri, 42);
-		
-		replies.forEach(reply -> logger.info(reply.toString()));
+	public void test() {
+		System.out.println(service.checkIdExist("test"));
 	}
+		
 }
