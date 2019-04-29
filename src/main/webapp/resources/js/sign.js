@@ -1,6 +1,6 @@
 var signService = (function(){
 	
-	function dupidChk(id, callback) {
+	function useIdChk(id, callback) {
 		$.getJSON("/signup/results/"+id+".json",
 			function(data) {
 				if(callback) {
@@ -14,6 +14,6 @@ var signService = (function(){
 	}
 	
 	return {
-		dupidChk : dupidChk
+		useIdChk : useIdChk
 	}
 })();
